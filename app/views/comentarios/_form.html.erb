@@ -1,0 +1,38 @@
+<%= form_for(@comentario) do |f| %>
+  <% if @comentario.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@comentario.errors.count, "error") %> prohibited this comentario from being saved:</h2>
+
+      <ul>
+      <% @comentario.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <% if Restaurante.all.count != 0 && Cliente.all.count != 0 %>
+    <div class="field">
+      <%= f.label :conteudo %><br />
+      <%= f.text_area :conteudo %>
+    </div>
+
+
+      <div class="field">
+        <%= f.label :restaurante_id %><br />
+          <%= f.collection_select( :restaurante_id, Restaurante.order('nome'), :id, :nome, {:prompt => true}) %>
+      </div>
+
+      <div class="field">
+        <%= f.label :cliente_id %><br />
+          <%= f.collection_select( :cliente_id, Cliente.order('nome'), :id, :nome, {:prompt => true}) %>
+      </div>
+
+
+    <div class="actions">
+      <%= submit_tag 'Criar Comentário' %>
+    </div>
+  <% else %>
+  <h2>É necessário existir  restaurante e  cliente para adicionar comentários </h2>
+  <% end %>
+<% end %>
+

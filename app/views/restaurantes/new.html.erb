@@ -1,0 +1,70 @@
+<html lang="en">
+<head>
+    <title>Restaurantes</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" media="screen" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="css/style.css">
+  </head>
+<body>
+<div class="bg-top">
+
+<div id="user_nav" align= "center">
+  <% if user_signed_in? %>
+    Entrou como <%= current_user.email %>. Não é você?
+    <%= link_to "Sair", destroy_user_session_path, :method => :delete %>
+  <% else %>
+    <%= link_to "Casdastrar-se", new_user_registration_path %> ou <%= link_to "Entrar", new_user_session_path %>
+  <% end %>
+</div>
+<div class="bgr">
+    <header>
+      <h1><%= image_tag "sar.png" %></h1>
+        <nav>  
+            <ul class="menu">
+              <li><a href="http://localhost:3000/home">Home</a></li>
+              <li  class="current" align="center"><a href="http://localhost:3000/restaurantes">Restaurantes</a></li>
+              <li><a href="http://localhost:3000/clientes">Clientes</a></li>
+              <li><a href="http://localhost:3000/qualificacoes">Qualificacoes</a></li>
+              <li><a href="http://localhost:3000/comentarios">Visão Geral</a></li>
+            </ul>
+         </nav>
+    </header>
+        <section id="content"><div class=></div>
+    <div class="block-2 pad-1">
+        <div class="box-2 top-2"></div>
+<table border="1" align="center" width="100%">
+    <div align="center">
+         <font face="Purisa" class="h3-line top-1"  class="h2-line"><h2 >Novo Restaurante</div></h2></font></td><br>
+<%= render partial: "titulo" %>
+	
+<% if @restaurante.errors.any? %></td>
+<ul>
+<% @restaurante.errors.full_messages.each do |msg| %>
+<li><%= msg %></li>
+<% end %>
+</ul>
+<% end %>
+
+<div class = "titletable">
+<table border='4'>
+
+<%= form_for :restaurante, url: {action: 'create'}, :html => {:multipart=>true} do |f| %>
+  <tr><td>Nome:</td> <td><%= f.text_field :nome %></td></tr><br/>
+  <tr><td>Endereço:</td> <td> <%= f.text_field :endereco %></td></tr><br/>
+  <tr><td>Especialidade:</td> <td> <%= f.text_field :especialidade %></td></tr><br/>
+  <tr><td>Foto:</td> <td> <%= f.file_field :foto %></td></tr><br/>
+  <tr><td>Telefone:</td> <td> <%= f.text_field :telefone %></td></tr><br/>
+  <tr><td><%= submit_tag 'Criar' %></td></tr>
+<% end %>
+</table>
+</div>
+
+<%= link_to 'Voltar', {action: 'index' } %></td>
+
+</table>
+
+        </div>
+</div>     
+</div>    
+</body>
+</html>  
